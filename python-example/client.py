@@ -1,13 +1,13 @@
-import requests
+import socket
+import os
 
-# url that we want to fetch
-api_url = "https://jsonplaceholder.typicode.com/todos/1"
+ip = '127.0.0.1'
+port = 4000
 
-# make the request
-response = requests.get(api_url)
-
-# convert to json
-json = response.json()
-
-# print it out
-print(json)
+tcp = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+tcp.connect((ip, port))
+load = "  " * 30
+buffer = bytearray(load, 'uft8')
+tcp.recv(buffer)
+print(buffer)
+tcp.close()
